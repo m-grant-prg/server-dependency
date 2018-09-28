@@ -1,0 +1,13 @@
+[Unit]
+Description=Dependency On Server At Boot
+Documentation=man:dosab.sh(8)
+After=network-online.target remote-fs.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=@sbindir@/dosab.sh
+Restart=no
+
+[Install]
+WantedBy=multi-user.target

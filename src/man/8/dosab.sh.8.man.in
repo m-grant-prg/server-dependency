@@ -1,0 +1,38 @@
+NAME
+dosab.sh - Take action depending on server availability during boot.
+SYNOPSIS
+dosab.sh [OPTION]
+DESCRIPTION
+This script reads a list of servers from the config file server.list and
+determines whether they are contactable. If they are, commands stored in the
+file server-name.available will be executed, if they are not, commands stored in
+the file server-name.unavailable will be executed. The existence of these files
+is not obligatory. Whilst this script could be run at any time, it is probably
+most useful at boot via systemd or equivalent. The package contains a systemd
+service file.
+OPTIONS
+-h, --help  prints usage information
+
+-V, --version  prints version information
+EXIT STATUS
+0
+if OK,
+
+1
+on failure.
+AUTHOR
+Written by Mark Grant.
+REPORTING BUGS
+Report bugs to <m.grant.prg@gmail.com>
+COPYRIGHT
+Copyright 2018 Mark Grant.
+.br
+License GPLv3+: GNU GPL version 3 or later
+.br
+<http://gnu.org/licenses/gpl.html>.
+.br
+This is free software: you are free to change and redistribute it.
+.br
+There is NO WARRANTY, to the extent permitted by law.
+SEE ALSO
+server.list(5)

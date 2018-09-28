@@ -1,0 +1,5 @@
+# My home server apt repositories.
+
+# deb-src http://hermes.mgent.home/aptrepo/ stretch stable beta
+deb http://hermes.mgent.home/aptrepo/ stretch stable beta
+

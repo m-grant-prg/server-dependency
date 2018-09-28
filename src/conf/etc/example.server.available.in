@@ -1,0 +1,12 @@
+# If the server is avalable perform all the following commands.
+
+# Mount my NFS shares on the server.
+# This expects the shares to be specified in the fstab file with the noauto
+# option so that they are not automatically mounted at boot.
+mount /mnt/example.servershare/publish
+mount /mnt/example.servershare/share
+
+# Add my APT repository on that server to my apt sources.
+
+cp ./example.server.list @sysconfdir@/apt/sources.list.d
+

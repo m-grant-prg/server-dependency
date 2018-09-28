@@ -1,0 +1,195 @@
+#! /usr/bin/env bash
+#########################################################################
+#									#
+#	dosab.sh is automatically generated,				#
+#		please do not modify!					#
+#									#
+#########################################################################
+
+#########################################################################
+#									#
+# Script ID: dosab.sh							#
+# Author: Copyright (C) 2018  Mark Grant				#
+#									#
+# Released under the GPLv3 only.					#
+# SPDX-License-Identifier: GPL-3.0					#
+#									#
+# Purpose:								#
+# To determine if a server is contactable and conditional on that,	#
+# execute stored commands.						#
+#									#
+# Syntax:	dosab.sh [ -h --help || -V --version ]			#
+#									#
+# Exit Codes:	0 - success						#
+#		1 - failure						#
+#									#
+# Further Info:								#
+# This script reads the file server.list and sequentially determines if	#
+# the named server exists. If server 'srv' is contactable commands	#
+# within the file srv.available are read and executed, if it is not	#
+# contactable then the file srv.unavailable is processed in the same	#
+# manner.								#
+#									#
+#########################################################################
+
+#########################################################################
+#									#
+# Changelog								#
+#									#
+# Date		Author	Version	Description				#
+#									#
+# 28/09/2018	MG	1.0.1	First release.				#
+#									#
+#########################################################################
+
+##################
+# Init variables #
+##################
+script_exit_code=0
+outputprefix="dosab.sh: "
+version="1.0.1"				# set version variable
+etclocation=@sysconfdir@/dosab		# Path to etc directory
+packageversion=@pkgversion@		# Version of the complete package
+
+
+#############
+# Functions #
+#############
+
+# Output $1 to stdout or stderr depending on $2 and write to syslog if required.
+# Syntax = output $1 (The message) $2 (0 = stdout, > 0 = stderr)
+# $3 (TRUE = syslog it).
+output()
+{
+	if [ $2 = 0 ]; then
+		echo "$outputprefix$1"
+	else
+		echo "$outputprefix$1" 1>&2
+	fi
+	if [ $3 = TRUE ]; then
+		logger "$outputprefix$1"
+		std_cmd_err_handler $?
+	fi
+}
+
+# Standard function to test command error ($1 is $?) and exit if non-zero
+std_cmd_err_handler()
+{
+	if [ $1 != 0 ]; then
+		script_exit_code=$1
+		script_exit
+	fi
+}
+
+# Standard function to tidy up and return exit code
+script_exit()
+{
+	exit $script_exit_code
+}
+
+# Standard trap exit function
+trap_exit()
+{
+script_exit_code=1
+output "Script terminating due to trap received. Code: "$script_exit_code 1 TRUE
+script_exit
+}
+
+# Setup trap
+trap trap_exit SIGHUP SIGINT SIGTERM
+
+
+########
+# Main #
+########
+# Process command line arguments with GNU getopt.
+GETOPTTEMP=`getopt -o hV --long help,version -n "$0" -- "$@"`
+std_cmd_err_handler $?
+
+eval set -- "$GETOPTTEMP"
+std_cmd_err_handler $?
+
+while true
+do
+	case "$1" in
+	-h|--help)
+		echo "Usage is $0 [options]"
+		echo "	-h or --help displays usage information"
+		echo "	OR"
+		echo "	-V or --version displays version information"
+		shift
+		script_exit_code=0
+		script_exit
+		;;
+	-V|--version)
+		echo "$0 Script version "$version
+		echo "$0 Package version "$packageversion
+		shift
+		script_exit_code=0
+		script_exit
+		;;
+	--)	shift
+		break
+		;;
+	*)	script_exit_code=1
+		output "Internal error." 1 FALSE
+		script_exit
+		;;
+	esac
+done
+
+# Script does not accept other arguments.
+if [ $# -gt 0 ]; then
+	script_exit_code=1
+	output "Invalid argument." 1 FALSE
+	script_exit
+fi
+
+# Read servers of interest from server.list
+if [ ! -f "$etclocation/server.list" ]; then
+	output "$etclocation/server.list does not exist." 1 TRUE
+	script_exit_code=1
+	script_exit
+fi
+
+exec 3<$etclocation/server.list
+std_cmd_err_handler $?
+
+while read -u3 -r srv
+do
+	# Ignore comment lines and blank lines.
+	if [[ $srv = "#"* || $srv = "" ]]; then
+		continue
+	fi
+	# Is server contactable
+	ping -c 3 "$srv" > /dev/null 2>&1
+	if [ $? = 0 ]; then
+		output "$srv is available." 0 FALSE
+		filetorun="$etclocation/$srv.available"
+	else
+		output "$srv is not available." 0 FALSE
+		filetorun="$etclocation/$srv.unavailable"
+	fi
+
+	# Process relevant file if present
+	if [ ! -f "$filetorun" ]; then
+		output "$filetorun is not available." 0 FALSE
+		continue
+	fi
+	exec 4<"$filetorun"
+	std_cmd_err_handler $?
+	output "Processing $filetorun" 0 FALSE
+	while read -u4 -r command
+	do
+		if [[ $command = "#"* || $command = "" ]]; then
+			continue
+		fi
+		eval "$command"
+	done
+	exec 4<&-
+done
+exec 3<&-
+
+script_exit_code=0
+output "script completed." 0 TRUE
+script_exit

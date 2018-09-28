@@ -1,0 +1,6 @@
+# If the server is unavalable perform all the following commands.
+
+# Remove my APT repository on that server from my apt sources.
+
+rm -f @sysconfdir@/apt/sources.list.d/example.server.list
+

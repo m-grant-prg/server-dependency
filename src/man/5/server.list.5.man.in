@@ -1,0 +1,29 @@
+NAME
+server.list - List of servers whose availability is to be checked at boot.
+DESCRIPTION
+A simple list of server names. The Dependency On Server At Boot scripts check
+during boot whether the servers are contactable. If they are, commands stored in
+the file server-name.available will be processed, if not, commands held in the
+file server-name.unavailable will be processed. It is not obligatory that either
+of these files exist.
+FILES
+server.list
+The file is stored in an etc directory. The exact location depends on the method
+of installation but for Autotools installations on Linux this is likely to
+be /usr/local/etc/dosab/server.list.
+AUTHOR
+Written by Mark Grant.
+REPORTING BUGS
+Report bugs to <m.grant.prg@gmail.com>
+COPYRIGHT
+Copyright 2018 Mark Grant.
+.br
+License GPLv3+: GNU GPL version 3 or later
+.br
+<http://gnu.org/licenses/gpl.html>.
+.br
+This is free software: you are free to change and redistribute it.
+.br
+There is NO WARRANTY, to the extent permitted by law.
+SEE ALSO
+dosab.sh(8)
