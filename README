@@ -18,6 +18,33 @@ Contents
 1 ... Project Description
 =========================
 
+This project enables you to test whether a server is contactable during boot and
+execute a series of commands depending on the outcome. It is probably easiest to
+understand from an example.
+
+The Problem
+-----------
+You have a laptop which when you are in the office needs to automatically mount
+some shares from an internal server. When travelling you don't want the laptop
+to attempt to automount the shares because that produces boot errors and boot
+delays. So a plain auto entry in /etc/fstab is out.
+
+The Solution
+------------
+Install this project.
+Enter the shares in /etc/fstab with the noauto option.
+Add the server to the /etc/dosab/server.list file.
+Add the mount commands to a file you create called
+/etc/dosab/server-name.available. (In this case if the server is unavailable you
+just want to do nothing so there is no server-name.unavailable file.
+
+Now, every time you boot the laptop it will mount the shares if the server is
+available and otherwise do nothing.
+
+Actual example files are available in the source tree in src/conf/etc and
+installed by the project in $docdir (often /usr/share/doc/server-dependency or
+/usr/local/share/doc/server-dependency).
+
 
 -------------------------------------------------
 2 ... AutoTools (configure and make) Installation
