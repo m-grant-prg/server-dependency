@@ -19,6 +19,7 @@
 # Date		Author	Version	Description				#
 #									#
 # 26/09/2018	MG	1.0.1	Initial release.			#
+# 29/09/2018	MG	1.0.2	Install example files in docdir.	#
 #									#
 #########################################################################
 
@@ -37,8 +38,10 @@ example.server.list: $(srcdir)/example.server.list.in
 example.server.unavailable: $(srcdir)/example.server.unavailable.in
 server.list: $(srcdir)/server.list.in
 
-conf_DATA = example.server.available example.server.list \
-	example.server.unavailable server.list
+conf_DATA = server.list
+
+doc_DATA = example.server.available example.server.list \
+	example.server.unavailable
 
 EXTRA_DIST = $(srcdir)/example.server.available.in example.server.list.in \
 	$(srcdir)/example.server.unavailable.in $(srcdir)/server.list.in
