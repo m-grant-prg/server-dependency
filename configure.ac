@@ -104,7 +104,6 @@ fi
 ########################
 
 AC_SUBST([edit], ["sed \
-		-e 's|@logrotateloc[@]|\$(logrotateloc)|g' \
 		-e 's|@pkgversion[@]|\$(pkgversion)|g' \
 		-e 's|@prefix[@]|\$(prefix)|g' \
 		-e 's|@exec_prefix[@]|\$(exec_prefix)|g' \
