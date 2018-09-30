@@ -8,5 +8,5 @@ mount /mnt/example.servershare/share
 
 # Add my APT repository on that server to my apt sources.
 
-cp ./example.server.list @sysconfdir@/apt/sources.list.d
+cp @sysconfdir@/example.server.list @sysconfdir@/apt/sources.list.d
 
