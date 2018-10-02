@@ -1,3 +1,6 @@
+----------------------------
+Dependency On Server At Boot
+============================
 --------
 Contents
 ========
@@ -32,8 +35,11 @@ delays. So a plain auto entry in /etc/fstab is out.
 The Solution
 ------------
 Install this project.
+
 Enter the shares in /etc/fstab with the noauto option.
+
 Add the server to the /etc/dosab/server.list file.
+
 Add the mount commands to a file you create called
 /etc/dosab/server-name.available. (In this case if the server is unavailable you
 just want to do nothing so there is no server-name.unavailable file.
@@ -86,19 +92,26 @@ Archive (PPA). If you add this PPA to your software sources then you can easily
 install, update and remove the package.
 
 To view the details of this PPA please follow the link below:-
+
 	https://code.launchpad.net/~m-grant-prg/+archive/ubuntu/utils
 
 To add this PPA to your system please type the following:-
+
 	sudo add-apt-repository ppa:m-grant-prg/utils
+
 	sudo apt-get update
 
 To install this script on your system for use please type the following:-
+
 	sudo apt-get update
+
 	sudo apt-get install server-dependency
-	After installation please follow section "2 ... AutoTools (configure
-	and make) Installation" from item (g) onwards.
+
+After installation please follow section "2 ... AutoTools (configure and make)
+Installation" from item (g) onwards.
 
 To uninstall this package at any time please type:-
+
 	sudo apt-get remove server-dependency
 
 
@@ -109,7 +122,9 @@ Debian and Raspbian '.deb' packages can be downloaded from:-
 	https://github.com/m-grant-prg/server-dependency/releases
 
 They can then be installed using a utility such as GDebi which is available in
-the standard repos. After installation please follow section "2 ... AutoTools
+the standard repos.
+
+After installation please follow section "2 ... AutoTools
 (configure and make) Installation" from item (g) onwards.
 
 
@@ -131,10 +146,13 @@ work from there, (.gitignore is already set to ignore such a directory).
 
 Assuming you adopt the preceding paragraph then a typical invocation of the
 script would be:-
-../bootstrap.sh --build ..
+
+	../bootstrap.sh --build ..
+
 The last '..' points the way to project root.
 
 The full list of arguments to bootstrap.sh are:-
+
 	-b, --build make the project.
 
 	-c, --config configure the project.
