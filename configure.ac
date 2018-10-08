@@ -38,7 +38,7 @@ AC_PREREQ([2.69])
 #
 ########################
 
-AC_INIT([Dependency On Server At Boot Project], [v1.0.1-rc1],
+AC_INIT([Dependency On Server At Boot Project], [v1.0.1-rc2],
 	[m.grant.prg@gmail.com], [server-dependency])
 
 AC_SUBST(pkgversion, $PACKAGE_VERSION)
