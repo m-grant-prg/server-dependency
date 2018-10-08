@@ -1,3 +1,8 @@
+Release 1.0.2 2018-10-08
+Add symbolic link from README.md to README to provide better appearance in
+Github.
+Improve README.md content and appearance.
+
 Release 1.0.1 2018-09-30
 Initial release.
 

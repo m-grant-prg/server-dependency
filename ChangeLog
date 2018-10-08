@@ -1,3 +1,9 @@
+2018-10-08 v 1.0.2 Mark Grant <m.grant.prg@gmail.com>
+	*  Add symbolic link from README.md to README to provide better
+	appearance in Github.
+	Improve README.md content and appearance.
+	dosab.sh script still at v1.0.1
+
 2018-09-30 v 1.0.1 Mark Grant <m.grant.prg@gmail.com>
 	*  Initial release.
 	dosab.sh script at v1.0.1
