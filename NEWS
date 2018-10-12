@@ -1,3 +1,8 @@
+Release 1.0.3 2018-10-12
+Ubuntu, Debian and Raspbian installation instructions have been moved to the
+wiki following the introduction of a Bintray repo for Debian and Raspbian
+installation. Leave a link to the wiki in the README file.
+
 Release 1.0.2 2018-10-08
 Add symbolic link from README.md to README to provide better appearance in
 Github.
