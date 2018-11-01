@@ -1,3 +1,7 @@
+2018-11-01 v 1.0.4 Mark Grant <m.grant.prg@gmail.com>
+	*  srctarball to use -src- in filename
+	dosab.sh script still at v1.0.1
+
 2018-10-12 v 1.0.3 Mark Grant <m.grant.prg@gmail.com>
 	*  Ubuntu, Debian and Raspbian installation instructions have been
 	moved to the wiki following the introduction of a Bintray repo for
