@@ -1,5 +1,9 @@
+
+# This file is maintained under the server-dependency package. Please make any
+# alterations there.
+
 # My home server apt repositories.
 
-# deb-src http://hermes.mgent.home/aptrepo/ stretch stable beta
-deb http://hermes.mgent.home/aptrepo/ stretch stable beta
+# deb-src http://hermes.mgent.home/aptrepos/debian/ stretch stable beta
+deb http://hermes.mgent.home/aptrepos/debian/ stretch stable beta
 
