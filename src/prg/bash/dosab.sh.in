@@ -9,7 +9,7 @@
 #########################################################################
 #									#
 # Script ID: dosab.sh							#
-# Author: Copyright (C) 2018  Mark Grant				#
+# Author: Copyright (C) 2018-2019  Mark Grant				#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0					#
@@ -42,14 +42,17 @@
 # 20/04/2019	MG	1.0.2	Standardise output function.		#
 #				Remove script_exit_code variable.	#
 #				Improve trap handling.			#
+#				Refactor into functions.		#
 #									#
 #########################################################################
+
 
 ##################
 # Init variables #
 ##################
+
 readonly outputprefix="$(basename $0):"
-version="1.0.1"				# set version variable
+version=1.0.2				# set version variable
 etclocation=@sysconfdir@/dosab		# Path to etc directory
 packageversion=@pkgversion@		# Version of the complete package
 
@@ -57,6 +60,19 @@ packageversion=@pkgversion@		# Version of the complete package
 #############
 # Functions #
 #############
+
+# -h --help output.
+# No parameters
+# No return value
+usage()
+{
+cat << EOF
+Usage is $0 [options]
+	-h or --help displays usage information
+	OR
+	-V or --version displays version information
+EOF
+}
 
 # Standard function to emit messages depending on various parameters.
 # Parameters -	$1 What:-	The message to emit.
@@ -110,82 +126,68 @@ trap_exit()
 # Setup trap.
 trap trap_exit SIGHUP SIGINT SIGQUIT SIGTERM
 
-
-########
-# Main #
-########
 # Process command line arguments with GNU getopt.
-GETOPTTEMP=`getopt -o hV --long help,version -n "$0" -- "$@"`
-std_cmd_err_handler $?
+# Parameters -	$1 is the command line.
+# No return value.
+proc_CL()
+{
+	local GETOPTTEMP
+	local tmpGETOPTTEMP
 
-eval set -- "$GETOPTTEMP"
-std_cmd_err_handler $?
-
-while true
-do
-	case "$1" in
-	-h|--help)
-		echo "Usage is $0 [options]"
-		echo "	-h or --help displays usage information"
-		echo "	OR"
-		echo "	-V or --version displays version information"
-		shift
-		script_exit 0
-		;;
-	-V|--version)
-		echo "$0 Script version "$version
-		echo "$0 Package version "$packageversion
-		shift
-		script_exit 0
-		;;
-	--)	shift
-		break
-		;;
-	*)	output "Internal error." 1 0
-		script_exit 1
-		;;
-	esac
-done
-
-# Script does not accept other arguments.
-if [ $# -gt 0 ]; then
-	output "Invalid argument." 1 0
-	script_exit 1
-fi
-
-# Read servers of interest from server.list
-if [ ! -f "$etclocation/server.list" ]; then
-	output "$etclocation/server.list does not exist." 1 1
-	script_exit 1
-fi
-
-exec 3<$etclocation/server.list
-std_cmd_err_handler $?
-
-while read -u3 -r srv
-do
-	# Ignore comment lines and blank lines.
-	if [[ $srv = "#"* || $srv = "" ]]; then
-		continue
-	fi
-	# Is server contactable
-	ping -c 3 "$srv" > /dev/null 2>&1
-	if [ $? = 0 ]; then
-		output "$srv is available." 0 0
-		filetorun="$etclocation/$srv.available"
-	else
-		output "$srv is not available." 0 0
-		filetorun="$etclocation/$srv.unavailable"
-	fi
-
-	# Process relevant file if present
-	if [ ! -f "$filetorun" ]; then
-		output "$filetorun is not available." 0 0
-		continue
-	fi
-	exec 4<"$filetorun"
+	tmpGETOPTTEMP="getopt -o hV --long help,version -n $0 -- $@"
+	GETOPTTEMP=$($tmpGETOPTTEMP)
 	std_cmd_err_handler $?
-	output "Processing $filetorun" 0 0
+
+	eval set -- "$GETOPTTEMP"
+	std_cmd_err_handler $?
+
+	while true
+	do
+		case "$1" in
+		-h|--help)
+			usage
+			shift
+			script_exit 0
+			;;
+		-V|--version)
+			printf "%s Script version %s\n" $0 $version
+			printf "%s Package version %s\n" $0 $packageversion
+			shift
+			script_exit 0
+			;;
+		--)	shift
+			break
+			;;
+		*)	output "Internal error." 1 0
+			script_exit 1
+			;;
+		esac
+	done
+
+	# Script does not accept other arguments.
+	if (( $# > 0 )); then
+		output "Invalid argument." 1 0
+		script_exit 1
+	fi
+}
+
+# Run the command file.
+# Parameters - $1 is the command file name.
+# No return value.
+run_cmd_file()
+{
+	local command
+
+	if [ ! -f "$1" ]; then
+		output "$1 is not available." 0 0
+		return
+	fi
+
+	exec 4<"$1"
+	std_cmd_err_handler $?
+
+	output "Processing $1" 0 0
+
 	while read -u4 -r command
 	do
 		if [[ $command = "#"* || $command = "" ]]; then
@@ -194,8 +196,59 @@ do
 		eval "$command"
 	done
 	exec 4<&-
-done
-exec 3<&-
+}
+
+# Process the server of interest.
+# Parameters - $1 is the server name.
+# No return value.
+proc_server()
+{
+	# Is server contactable
+	ping -c 3 "$1" > /dev/null 2>&1
+	if [ $? = 0 ]; then
+		output "$1 is available." 0 0
+		run_cmd_file "$etclocation/$1.available"
+	else
+		output "$1 is not available." 0 0
+		run_cmd_file "$etclocation/$1.unavailable"
+	fi
+
+}
+
+# Read and process servers of interest from server.list
+# No parameters.
+# No return value.
+proc_server_list()
+{
+	local srv
+
+	if [ ! -f "$etclocation/server.list" ]; then
+		output "$etclocation/server.list does not exist." 1 1
+		script_exit 1
+	fi
+
+	exec 3<$etclocation/server.list
+	std_cmd_err_handler $?
+
+	while read -u3 -r srv
+	do
+		# Ignore comment lines and blank lines.
+		if [[ $srv = "#"* || $srv = "" ]]; then
+			continue
+		fi
+		proc_server $srv
+	done
+	exec 3<&-
+}
+
+
+########
+# Main #
+########
+
+proc_CL "$@"
+
+proc_server_list
 
 output "script completed." 0 1
 script_exit 0
