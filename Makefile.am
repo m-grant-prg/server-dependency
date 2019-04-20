@@ -24,6 +24,8 @@
 #				filename.				#
 # 20/04/2019	MG	1.0.3	Remove shebang.				#
 #				Make source tarball name == GitHub.	#
+#				Add install of standard GNU files like	#
+#				AUTHORS, etc.				#
 #									#
 #########################################################################
 
@@ -38,6 +40,13 @@ SUBDIRS += src/conf/etc
 if SYSD
 SUBDIRS += src/systemd
 endif
+
+
+doc_DATA = AUTHORS ChangeLog COPYING NEWS README
+
+
+EXTRA_DIST = $(srcdir)/AUTHORS $(srcdir)/ChangeLog $(srcdir)/COPYING \
+		$(srcdir)/NEWS $(srcdir)/README
 
 
 srctarball:
