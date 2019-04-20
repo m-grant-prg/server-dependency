@@ -205,7 +205,7 @@ proc_server()
 {
 	# Is server contactable
 	ping -c 3 "$1" > /dev/null 2>&1
-	if [ $? = 0 ]; then
+	if (( ! $? )); then
 		output "$1 is available." 0 0
 		run_cmd_file "$etclocation/$1.available"
 	else
