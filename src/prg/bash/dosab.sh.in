@@ -39,6 +39,7 @@
 # Date		Author	Version	Description				#
 #									#
 # 28/09/2018	MG	1.0.1	First release.				#
+# 20/04/2019	MG	1.0.2	Standardise output function.		#
 #									#
 #########################################################################
 
@@ -46,7 +47,7 @@
 # Init variables #
 ##################
 script_exit_code=0
-outputprefix="dosab.sh: "
+readonly outputprefix="$(basename $0):"
 version="1.0.1"				# set version variable
 etclocation=@sysconfdir@/dosab		# Path to etc directory
 packageversion=@pkgversion@		# Version of the complete package
@@ -56,18 +57,22 @@ packageversion=@pkgversion@		# Version of the complete package
 # Functions #
 #############
 
-# Output $1 to stdout or stderr depending on $2 and write to syslog if required.
-# Syntax = output $1 (The message) $2 (0 = stdout, > 0 = stderr)
-# $3 (TRUE = syslog it).
+# Standard function to emit messages depending on various parameters.
+# Parameters -	$1 What:-	The message to emit.
+#		$2 Where:-	stdout == 0
+#				stderr != 0
+#		$3 Syslog:-	$3 == 0, No.
+#				$3 != 0, Yes.
+# No return value.
 output()
 {
-	if [ $2 = 0 ]; then
-		echo "$outputprefix$1"
+	if (( !$2 )); then
+		printf "%s %s\n" $outputprefix "$1"
 	else
-		echo "$outputprefix$1" 1>&2
+		printf "%s %s\n" $outputprefix "$1" 1>&2
 	fi
-	if [ $3 = TRUE ]; then
-		logger "$outputprefix$1"
+	if (( $3 )); then
+		logger "$outputprefix $1"
 		std_cmd_err_handler $?
 	fi
 }
@@ -132,7 +137,7 @@ do
 		break
 		;;
 	*)	script_exit_code=1
-		output "Internal error." 1 FALSE
+		output "Internal error." 1 0
 		script_exit
 		;;
 	esac
@@ -141,13 +146,13 @@ done
 # Script does not accept other arguments.
 if [ $# -gt 0 ]; then
 	script_exit_code=1
-	output "Invalid argument." 1 FALSE
+	output "Invalid argument." 1 0
 	script_exit
 fi
 
 # Read servers of interest from server.list
 if [ ! -f "$etclocation/server.list" ]; then
-	output "$etclocation/server.list does not exist." 1 TRUE
+	output "$etclocation/server.list does not exist." 1 1
 	script_exit_code=1
 	script_exit
 fi
@@ -164,21 +169,21 @@ do
 	# Is server contactable
 	ping -c 3 "$srv" > /dev/null 2>&1
 	if [ $? = 0 ]; then
-		output "$srv is available." 0 FALSE
+		output "$srv is available." 0 0
 		filetorun="$etclocation/$srv.available"
 	else
-		output "$srv is not available." 0 FALSE
+		output "$srv is not available." 0 0
 		filetorun="$etclocation/$srv.unavailable"
 	fi
 
 	# Process relevant file if present
 	if [ ! -f "$filetorun" ]; then
-		output "$filetorun is not available." 0 FALSE
+		output "$filetorun is not available." 0 0
 		continue
 	fi
 	exec 4<"$filetorun"
 	std_cmd_err_handler $?
-	output "Processing $filetorun" 0 FALSE
+	output "Processing $filetorun" 0 0
 	while read -u4 -r command
 	do
 		if [[ $command = "#"* || $command = "" ]]; then
@@ -191,5 +196,5 @@ done
 exec 3<&-
 
 script_exit_code=0
-output "script completed." 0 TRUE
+output "script completed." 0 1
 script_exit
