@@ -40,13 +40,13 @@
 #									#
 # 28/09/2018	MG	1.0.1	First release.				#
 # 20/04/2019	MG	1.0.2	Standardise output function.		#
+#				Remove script_exit_code variable.	#
 #									#
 #########################################################################
 
 ##################
 # Init variables #
 ##################
-script_exit_code=0
 readonly outputprefix="$(basename $0):"
 version="1.0.1"				# set version variable
 etclocation=@sysconfdir@/dosab		# Path to etc directory
@@ -81,23 +81,23 @@ output()
 std_cmd_err_handler()
 {
 	if [ $1 != 0 ]; then
-		script_exit_code=$1
-		script_exit
+		script_exit $1
 	fi
 }
 
-# Standard function to tidy up and return exit code
+# Standard function to tidy up and return exit code.
+# Parameters - 	$1 is the exit code.
+# No return value.
 script_exit()
 {
-	exit $script_exit_code
+	exit $1
 }
 
 # Standard trap exit function
 trap_exit()
 {
-script_exit_code=1
-output "Script terminating due to trap received. Code: "$script_exit_code 1 TRUE
-script_exit
+output "Script terminating due to trap received. Code: 1" 1 TRUE
+script_exit 1
 }
 
 # Setup trap
@@ -123,38 +123,33 @@ do
 		echo "	OR"
 		echo "	-V or --version displays version information"
 		shift
-		script_exit_code=0
-		script_exit
+		script_exit 0
 		;;
 	-V|--version)
 		echo "$0 Script version "$version
 		echo "$0 Package version "$packageversion
 		shift
-		script_exit_code=0
-		script_exit
+		script_exit 0
 		;;
 	--)	shift
 		break
 		;;
-	*)	script_exit_code=1
-		output "Internal error." 1 0
-		script_exit
+	*)	output "Internal error." 1 0
+		script_exit 1
 		;;
 	esac
 done
 
 # Script does not accept other arguments.
 if [ $# -gt 0 ]; then
-	script_exit_code=1
 	output "Invalid argument." 1 0
-	script_exit
+	script_exit 1
 fi
 
 # Read servers of interest from server.list
 if [ ! -f "$etclocation/server.list" ]; then
 	output "$etclocation/server.list does not exist." 1 1
-	script_exit_code=1
-	script_exit
+	script_exit 1
 fi
 
 exec 3<$etclocation/server.list
@@ -195,6 +190,6 @@ do
 done
 exec 3<&-
 
-script_exit_code=0
 output "script completed." 0 1
-script_exit
+script_exit 0
+
