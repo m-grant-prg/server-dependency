@@ -43,6 +43,7 @@
 #				Remove script_exit_code variable.	#
 #				Improve trap handling.			#
 #				Refactor into functions.		#
+#				Tidy up local and readonly variables.	#
 #									#
 #########################################################################
 
@@ -52,9 +53,9 @@
 ##################
 
 readonly outputprefix="$(basename $0):"
-version=1.0.2				# set version variable
-etclocation=@sysconfdir@/dosab		# Path to etc directory
-packageversion=@pkgversion@		# Version of the complete package
+readonly version=1.0.2				# Script version
+readonly etclocation=@sysconfdir@/dosab		# Path to etc directory
+readonly packageversion=@pkgversion@		# Package version
 
 
 #############
