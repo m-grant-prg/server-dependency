@@ -1,8 +1,7 @@
-#! /usr/bin/env bash
 #########################################################################
 #									#
 # Script ID: src/systemd/Makefile.am					#
-# Author: Copyright (C) 2018  Mark Grant				#
+# Author: Copyright (C) 2018-2019  Mark Grant				#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0					#
@@ -21,6 +20,7 @@
 # 28/09/2018	MG	1.0.1	First release. This only gets executed	#
 #				if configure is run with		#
 #				--enable-systemd=yes.			#
+# 20/04/2019	MG	1.0.2	Remove shebang.				#
 #									#
 #########################################################################
 
