@@ -23,6 +23,7 @@
 #				src between package name and version in	#
 #				filename.				#
 # 20/04/2019	MG	1.0.3	Remove shebang.				#
+#				Make source tarball name == GitHub.	#
 #									#
 #########################################################################
 
@@ -41,7 +42,7 @@ endif
 
 srctarball:
 	@cwd="$${PWD}" && \
-	targ="$${cwd}/@PACKAGE_TARNAME@-src-@PACKAGE_VERSION@.tar.gz" && \
+	targ="$${cwd}/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz" && \
 	cd @srcdir@ && \
 	echo "making srctarball from @srcdir@" && \
 	echo "GA	$${targ}" && \

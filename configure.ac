@@ -1,7 +1,7 @@
 #########################################################################
 #									#
 # Script ID: ./configure.ac						#
-# Author: Copyright (C) 2018  Mark Grant				#
+# Author: Copyright (C) 2018-2019  Mark Grant				#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0					#
@@ -22,10 +22,11 @@
 # Date		Author	Version	Description				#
 #									#
 # 28/09/2018	MG	1.0.1	Initial release.			#
+# 20/04/2019	MG	1.0.2	Remove preceding v from version.	#
 #									#
 #########################################################################
 
-AC_REVISION([$Revision: 1.0.1 $])
+AC_REVISION([$Revision: 1.0.2 $])
 
 AC_PREREQ([2.69])
 
@@ -38,7 +39,7 @@ AC_PREREQ([2.69])
 #
 ########################
 
-AC_INIT([Dependency On Server At Boot Project], [v1.0.4],
+AC_INIT([Dependency On Server At Boot Project], [1.0.4],
 	[m.grant.prg@gmail.com], [server-dependency])
 
 AC_SUBST(pkgversion, $PACKAGE_VERSION)
