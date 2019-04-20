@@ -143,8 +143,7 @@ proc_CL()
 	eval set -- "$GETOPTTEMP"
 	std_cmd_err_handler $?
 
-	while true
-	do
+	while true; do
 		case "$1" in
 		-h|--help)
 			usage
@@ -190,8 +189,7 @@ run_cmd_file()
 
 	output "Processing $1" 0 0
 
-	while read -u4 -r command
-	do
+	while read -u4 -r command; do
 		if [[ $command = "#"* || $command = "" ]]; then
 			continue
 		fi
@@ -232,8 +230,7 @@ proc_server_list()
 	exec 3<$etclocation/server.list
 	std_cmd_err_handler $?
 
-	while read -u3 -r srv
-	do
+	while read -u3 -r srv; do
 		# Ignore comment lines and blank lines.
 		if [[ $srv = "#"* || $srv = "" ]]; then
 			continue
