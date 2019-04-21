@@ -42,6 +42,7 @@
 # 28/09/2018	MG	1.0.1	Initial release.			#
 # 21/04/2019	MG	1.0.2	Remove preceding v from version.	#
 #				Re-vamp to new standard layout.		#
+# 21/04/2019	MG	1.0.3	Change logger program check to warn.	#
 #									#
 #########################################################################
 
@@ -52,7 +53,7 @@
 #					#
 #########################################
 
-AC_REVISION([$Revision: 1.0.2 $])
+AC_REVISION([$Revision: 1.0.3 $])
 
 AC_PREREQ([2.69])
 
@@ -202,7 +203,7 @@ fi
 
 AC_CHECK_PROG([LOGGER], [logger], [yes], [no])
 if test "x$LOGGER" = "xno" ; then
-   	AC_MSG_ERROR([logger not found])
+	AC_MSG_WARN([logger not found])
 fi
 
 
