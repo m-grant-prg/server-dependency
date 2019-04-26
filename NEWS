@@ -1,3 +1,25 @@
+Release 1.1.1 2019-04-26
+Change configure logger program check to warn
+Replace #! env bash to abs path from configure
+Revamp configure.ac to new standard format
+README: Make package install references generic
+README: Add copyright statement
+Install standard GNU files such as NEWS etc
+Make source tarball name == GitHub
+Remove shebangs from Makefile.ams
+Use more meaningful exit codes
+Tidy up variable declarations
+Use (( ... )) for numerics
+Make loops and conditionals C-shaped
+Standardise error handler function
+Refactor into functions
+Update bootstrap.sh to v1.4.2
+Improve trap handling
+Remove script_exit_code variable
+Standardise output function
+Example .list file only to contain stable repo
+Add warning file is maintained by this package
+
 Release 1.0.4 2018-11-01
 srctarball to use -src- in filename
 
