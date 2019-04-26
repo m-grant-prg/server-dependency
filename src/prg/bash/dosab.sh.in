@@ -60,7 +60,7 @@
 # Date		Author	Version	Description				#
 #									#
 # 28/09/2018	MG	1.0.1	First release.				#
-# 21/04/2019	MG	1.0.2	Standardise output function.		#
+# 26/04/2019	MG	1.1.1	Standardise output function.		#
 #				Remove script_exit_code variable.	#
 #				Improve trap handling.			#
 #				Refactor into functions.		#
@@ -77,7 +77,7 @@
 ##################
 
 readonly outputprefix="$(basename $0):"
-readonly version=1.0.2				# Script version
+readonly version=1.1.1				# Script version
 readonly etclocation=@sysconfdir@/dosab		# Path to etc directory
 readonly packageversion=@pkgversion@		# Package version
 
