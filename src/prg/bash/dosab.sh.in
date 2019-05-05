@@ -68,7 +68,9 @@
 #				Use more meaningful exit codes.		#
 #				Replace #! env bash to absolute path	#
 #				from configure.				#
-# 02/05/2019	MG	1.1.2	Correct getopt CL for proper quoting.	#
+# 05/05/2019	MG	1.1.2	Correct getopt CL for proper quoting.	#
+#				Use eval to process variables which may	#
+#				contain quotes.				#
 #									#
 #########################################################################
 
@@ -205,7 +207,7 @@ run_cmd_file()
 {
 	local command
 
-	if [ ! -f "$1" ]; then
+	if [[ ! -f $1 ]]; then
 		output "$1 is not available." 0 0
 		return
 	fi
@@ -230,13 +232,13 @@ run_cmd_file()
 proc_server()
 {
 	# Is server contactable
-	ping -c 3 "$1" > /dev/null 2>&1
+	eval "ping -c 3 $1 > /dev/null 2>&1"
 	if (( ! $? )); then
 		output "$1 is available." 0 0
-		run_cmd_file "$etclocation/$1.available"
+		eval "run_cmd_file $etclocation/$1.available"
 	else
 		output "$1 is not available." 0 0
-		run_cmd_file "$etclocation/$1.unavailable"
+		eval "run_cmd_file $etclocation/$1.unavailable"
 	fi
 
 }
@@ -261,7 +263,7 @@ proc_server_list()
 		if [[ $srv = "#"* || $srv = "" ]]; then
 			continue
 		fi
-		proc_server $srv
+		proc_server "$srv"
 	done
 	exec 3<&-
 }
