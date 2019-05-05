@@ -1,3 +1,8 @@
+Release 1.1.2 2019-05-05
+Use eval where variables may contain quotes
+Update bootstrap.sh to v1.4.3
+Correct getopt CL WRT quoting
+
 Release 1.1.1 2019-04-26
 Change configure logger program check to warn
 Replace #! env bash to abs path from configure

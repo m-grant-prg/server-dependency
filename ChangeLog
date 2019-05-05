@@ -1,3 +1,9 @@
+2019-05-05 v 1.1.2 Mark Grant <m.grant.prg@gmail.com>
+	* Use eval where variables may contain quotes
+	Update bootstrap.sh to v1.4.3
+	Correct getopt CL WRT quoting
+	dosab.sh script now at v1.1.2
+
 2019-04-26 v 1.1.1 Mark Grant <m.grant.prg@gmail.com>
 	*  Change configure logger program check to warn
 	Replace #! env bash to abs path from configure
