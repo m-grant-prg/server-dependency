@@ -101,7 +101,7 @@ AC_MSG_NOTICE(checking command line arguments)
 # conditional SYSD is made available to the makefiles.
 #
 AC_ARG_ENABLE(systemd,
-	--enable-systemd    Build for systemd,
+	AS_HELP_STRING([--enable-systemd], [build for systemd]),
 	[case "${enableval}" in
 		yes) systemd=true ;;
 		no)  systemd=false ;;
