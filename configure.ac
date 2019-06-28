@@ -110,7 +110,7 @@ AC_ARG_ENABLE(systemd,
 AM_CONDITIONAL(SYSD, test x$systemd = xtrue)
 
 if test "x${systemd}" = xtrue; then
-	AC_MSG_NOTICE(Building for systemd.)
+	AC_MSG_NOTICE(building for systemd)
 fi
 
 
