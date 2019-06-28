@@ -13,6 +13,11 @@
 # configure cmd line syntax:						#
 # ./configure	[--enable-systemd=yes|no> [default: no]]		#
 #									#
+# Parameters generic description. For specifics to this configure.ac	#
+# please see inline comments at the point of definition:-		#
+# --enable-systemd							#
+#	Use this option to build, install etc the systemd unit file.	#
+#									#
 # Layout: (Only relevant sections will exist).				#
 # ChangeLog : High level ChangeLog					#
 # SECTION  1: Initialisation & Setup					#
@@ -43,6 +48,10 @@
 # 21/04/2019	MG	1.0.2	Remove preceding v from version.	#
 #				Re-vamp to new standard layout.		#
 # 21/04/2019	MG	1.0.3	Change logger program check to warn.	#
+# 28/06/2019	MG	1.0.4	Correct ARG_ENABLE help text and	#
+#				message.				#
+#				Add enable option description to this	#
+#				file's header.				#
 #									#
 #########################################################################
 
@@ -53,7 +62,7 @@
 #					#
 #########################################
 
-AC_REVISION([$Revision: 1.0.3 $])
+AC_REVISION([$Revision: 1.0.4 $])
 
 AC_PREREQ([2.69])
 
