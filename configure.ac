@@ -71,7 +71,7 @@ AC_PREREQ([2.69])
 # can be used by ac output and / or the sed setup below to substitute bookmarks
 # in source files.
 #
-AC_INIT([Dependency On Server At Boot Project], [1.1.3],
+AC_INIT([Dependency On Server At Boot Project], [1.1.4],
 	[m.grant.prg@gmail.com], [server-dependency])
 
 AC_MSG_NOTICE(initialisation and setup)
