@@ -53,6 +53,7 @@
 #				Add enable option description to this	#
 #				file's header.				#
 # 23/02/2020	MG	1.0.5	Sort program checks alphabetically.	#
+#				Add check for ping.			#
 #									#
 #########################################################################
 
@@ -209,6 +210,11 @@ fi
 AC_CHECK_PROG([LOGGER], [logger], [yes], [no])
 if test "x$LOGGER" = "xno" ; then
 	AC_MSG_WARN([logger not found])
+fi
+
+AC_CHECK_PROG(PING, ping, yes, no)
+if test "x$PING" = "xno" ; then
+	AC_MSG_WARN(ping not found - needed at run time)
 fi
 
 AC_CHECK_PROG(PRINTF, printf, yes, no)
