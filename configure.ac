@@ -1,7 +1,7 @@
 #########################################################################
 #									#
 # Script ID: ./configure.ac						#
-# Author: Copyright (C) 2018-2019  Mark Grant				#
+# Author: Copyright (C) 2018-2020  Mark Grant				#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0					#
@@ -52,6 +52,7 @@
 #				message.				#
 #				Add enable option description to this	#
 #				file's header.				#
+# 23/02/2020	MG	1.0.5	Sort program checks alphabetically.	#
 #									#
 #########################################################################
 
@@ -62,7 +63,7 @@
 #					#
 #########################################
 
-AC_REVISION([$Revision: 1.0.4 $])
+AC_REVISION([$Revision: 1.0.5 $])
 
 AC_PREREQ([2.69])
 
@@ -200,11 +201,6 @@ if test "x$ECHO" = "xno" ; then
 	AC_MSG_WARN(echo not found - needed at run time)
 fi
 
-AC_CHECK_PROG(PRINTF, printf, yes, no)
-if test "x$PRINTF" = "xno" ; then
-	AC_MSG_WARN(printf not found - needed at run time)
-fi
-
 AC_CHECK_PROG([GETOPT], [getopt], [yes], [no])
 if test "x$GETOPT" = "xno" ; then
 	AC_MSG_WARN(getopt not found - needed at run time)
@@ -213,6 +209,11 @@ fi
 AC_CHECK_PROG([LOGGER], [logger], [yes], [no])
 if test "x$LOGGER" = "xno" ; then
 	AC_MSG_WARN([logger not found])
+fi
+
+AC_CHECK_PROG(PRINTF, printf, yes, no)
+if test "x$PRINTF" = "xno" ; then
+	AC_MSG_WARN(printf not found - needed at run time)
 fi
 
 
