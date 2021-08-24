@@ -1,7 +1,7 @@
 #########################################################################
 #									#
 # Script ID: ./Makefile.am						#
-# Author: Copyright (C) 2018-2019  Mark Grant				#
+# Author: Copyright (C) 2018-2019, 2021  Mark Grant			#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0					#
@@ -26,6 +26,15 @@
 #				Make source tarball name == GitHub.	#
 #				Add install of standard GNU files like	#
 #				AUTHORS, etc.				#
+# 24/08/2021	MG	1.0.4	Correct systemd action ordering.	#
+#									#
+#########################################################################
+
+#########################################################################
+#									#
+# N.B.									#
+# ====									#
+# The sequence of the build is important for systemd, see below.	#
 #									#
 #########################################################################
 
@@ -33,10 +42,24 @@
 ACLOCAL_AMFLAGS = -I m4
 
 
-SUBDIRS = src/prg/bash
+SUBDIRS = src/conf/etc
 SUBDIRS += src/man/5 src/man/8
-SUBDIRS += src/conf/etc
 
+# systemd requires the ordering of certain actions, so:-
+# Install
+#	bash
+#	service
+#	service-post (hook)
+#		enable service
+#		start service
+# Uninstall
+#	bash-pre (local)
+#		disable service
+#	bash
+#	service
+#	service-post (hook)
+#		daemon reload
+SUBDIRS += src/prg/bash
 if SYSD
 SUBDIRS += src/systemd
 endif

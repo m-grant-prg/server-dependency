@@ -1,7 +1,7 @@
 #########################################################################
 #									#
 # Script ID: src/systemd/Makefile.am					#
-# Author: Copyright (C) 2018-2019  Mark Grant				#
+# Author: Copyright (C) 2018-2019, 2021  Mark Grant			#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0					#
@@ -21,6 +21,7 @@
 #				if configure is run with		#
 #				--enable-systemd=yes.			#
 # 20/04/2019	MG	1.0.2	Remove shebang.				#
+# 24/08/2021	MG	1.0.3	Correct systemd action ordering.	#
 #									#
 #########################################################################
 
@@ -34,19 +35,16 @@ dosab.service: Makefile
 	mv $@.tmp $@
 dosab.service: $(srcdir)/dosab.service.in
 
-
 systemd_DATA = dosab.service
 
-
+# systemd requires some ordering of it's actions. Please refer to the comment in
+# the top-level Makefile.am
 install-data-hook:
 	systemctl enable dosab.service
 	systemctl start dosab.service
 
-
-uninstall-local:
-	systemctl stop dosab.service
-	systemctl disable dosab.service
-
+uninstall-hook:
+	systemctl daemon-reload
 
 EXTRA_DIST = $(srcdir)/dosab.service.in
 
