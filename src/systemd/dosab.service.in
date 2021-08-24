@@ -5,9 +5,14 @@ After=network-online.target remote-fs.target
 Wants=network-online.target
 
 [Service]
-Type=simple
+Type=exec
+
 ExecStart=@sbindir@/dosab.sh
 Restart=no
+
+PrivateDevices=true
+PrivateTmp=true
+ProtectHome=true
 
 [Install]
 WantedBy=multi-user.target
