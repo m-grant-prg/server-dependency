@@ -10,7 +10,5 @@ Type=exec
 ExecStart=@sbindir@/dosab.sh
 Restart=no
 
-PrivateTmp=true
-
 [Install]
 WantedBy=multi-user.target
