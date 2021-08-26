@@ -10,9 +10,7 @@ Type=exec
 ExecStart=@sbindir@/dosab.sh
 Restart=no
 
-PrivateDevices=true
 PrivateTmp=true
-ProtectHome=true
 
 [Install]
 WantedBy=multi-user.target
