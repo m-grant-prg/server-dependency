@@ -27,6 +27,7 @@
 #				Add install of standard GNU files like	#
 #				AUTHORS, etc.				#
 # 24/08/2021	MG	1.0.4	Correct systemd action ordering.	#
+# 30/08/2021	MG	1.0.5	Add misc subdir to DIST.		#
 #									#
 #########################################################################
 
@@ -68,8 +69,9 @@ endif
 doc_DATA = AUTHORS ChangeLog COPYING NEWS README
 
 
-EXTRA_DIST = $(srcdir)/AUTHORS $(srcdir)/ChangeLog $(srcdir)/COPYING \
-		$(srcdir)/NEWS $(srcdir)/README
+EXTRA_DIST = $(srcdir)/AUTHORS $(srcdir)/ChangeLog $(srcdir)/COPYING
+EXTRA_DIST += $(srcdir)/NEWS $(srcdir)/README
+EXTRA_DIST += $(srcdir)/misc
 
 
 srctarball:
