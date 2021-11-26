@@ -1,3 +1,14 @@
+2021-11-26 v1.1.7 Mark Grant <m.grant.prg@gmail.com>
+	* at: Add AC_COPYRIGHT macro
+	all: Tighten SPDX tags
+	at: Upgrade bootstrap.sh to v1.4.10
+	git: Update mailmap to v1.0.2
+	git: Update gitignore tp v1.0.7
+	git: Update gitattributes to v1.0.2
+	at: Use git to enhance package version
+	lxcu: Add openSUSE
+	lxcu: Add Fedora
+
 2021-08-30 v1.1.6 Mark Grant <m.grant.prg@gmail.com>
 	* at: Add subdir misc to DIST
 	at: Correct systemd action ordering
