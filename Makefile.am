@@ -4,7 +4,7 @@
 # Author: Copyright (C) 2018-2019, 2021  Mark Grant			#
 #									#
 # Released under the GPLv3 only.					#
-# SPDX-License-Identifier: GPL-3.0					#
+# SPDX-License-Identifier: GPL-3.0-only					#
 #									#
 # Purpose:								#
 # AutoMake script file to generate Dependency on Server At Boot project	#
@@ -28,6 +28,7 @@
 #				AUTHORS, etc.				#
 # 24/08/2021	MG	1.0.4	Correct systemd action ordering.	#
 # 30/08/2021	MG	1.0.5	Add misc subdir to DIST.		#
+# 26/11/2021	MG	1.0.6	Tighten SPDX tag.			#
 #									#
 #########################################################################
 
