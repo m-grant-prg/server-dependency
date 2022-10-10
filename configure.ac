@@ -61,6 +61,7 @@
 #				Add AC_COPYRIGHT macro.			#
 # 10/10/2022	MG	1.0.7	Separate AutoTools generated files from	#
 #				project root.				#
+#				Use AC MSG CHECKING where appropriate.	#
 #									#
 #########################################################################
 
@@ -149,8 +150,11 @@ AC_ARG_ENABLE(systemd,
 	esac],systemd=false)
 AM_CONDITIONAL(SYSD, test x$systemd = xtrue)
 
+AC_MSG_CHECKING([whether to build for systemd])
 if test "x${systemd}" = xtrue; then
-	AC_MSG_NOTICE(building for systemd)
+	AC_MSG_RESULT([yes])
+else
+	AC_MSG_RESULT([no])
 fi
 
 
