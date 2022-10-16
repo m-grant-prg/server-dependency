@@ -94,7 +94,7 @@ AC_PREREQ([2.69])
 # in source files.
 #
 # Set pkg_version for a default hard-coded version number.
-m4_define(pkg_version, 1.1.7)
+m4_define(pkg_version, 1.2.0)
 
 AC_INIT([Dependency On Server At Boot Project], m4_esyscmd([ \
 	git describe --always 1>/dev/null 2>/dev/null \
