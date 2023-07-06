@@ -9,7 +9,7 @@
 #########################################################################
 #									#
 # Script ID: dosab.sh							#
-# Author: Copyright (C) 2018-2019, 2021  Mark Grant			#
+# Author: Copyright (C) 2018-2019, 2021, 2023  Mark Grant		#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0-only					#
@@ -75,6 +75,7 @@
 #				used.					#
 #				Move script_exit() before it is used.	#
 # 26/11/2021	MG	1.1.4	Tighten SPDX tag.			#
+# 06/07/2023	MG	1.1.5	Fix shellcheck warnings.		#
 #									#
 #########################################################################
 
@@ -83,8 +84,8 @@
 # Init variables #
 ##################
 
-readonly outputprefix="$(basename $0):"
-readonly version=1.1.4				# Script version
+readonly outputprefix="$(basename "$0"):"
+readonly version=1.1.5				# Script version
 readonly etclocation=@sysconfdir@/dosab		# Path to etc directory
 readonly packageversion=@pkgversion@		# Package version
 
@@ -111,7 +112,7 @@ EOF
 # No return value.
 script_exit()
 {
-	exit $1
+	exit "$1"
 }
 
 # Standard function to test command error and exit if non-zero.
@@ -120,7 +121,7 @@ script_exit()
 std_cmd_err_handler()
 {
 	if (( $1 )); then
-		script_exit $1
+		script_exit "$1"
 	fi
 }
 
@@ -134,9 +135,9 @@ std_cmd_err_handler()
 output()
 {
 	if (( !$2 )); then
-		printf "%s %s\n" $outputprefix "$1"
+		printf "%s %s\n" "$outputprefix" "$1"
 	else
-		printf "%s %s\n" $outputprefix "$1" 1>&2
+		printf "%s %s\n" "$outputprefix" "$1" 1>&2
 	fi
 	if (( $3 )); then
 		logger "$outputprefix $1"
@@ -183,8 +184,8 @@ proc_CL()
 			script_exit 0
 			;;
 		-V|--version)
-			printf "%s Script version %s\n" $0 $version
-			printf "%s Package version %s\n" $0 $packageversion
+			printf "%s Script version %s\n" "$0" $version
+			printf "%s Package version %s\n" "$0" $packageversion
 			shift
 			script_exit 0
 			;;
