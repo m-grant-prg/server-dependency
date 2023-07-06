@@ -1,7 +1,7 @@
 #########################################################################
 #									#
 # Script ID: ./Makefile.am						#
-# Author: Copyright (C) 2018-2019, 2021  Mark Grant			#
+# Author: Copyright (C) 2018-2019, 2021, 2023  Mark Grant		#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0-only					#
@@ -29,6 +29,8 @@
 # 24/08/2021	MG	1.0.4	Correct systemd action ordering.	#
 # 30/08/2021	MG	1.0.5	Add misc subdir to DIST.		#
 # 26/11/2021	MG	1.0.6	Tighten SPDX tag.			#
+# 06/07/2023	MG	1.0.7	Enable use of v1.1.1~rc1 type vesrion	#
+#				numbers for source tarballs.		#
 #									#
 #########################################################################
 
@@ -77,12 +79,13 @@ EXTRA_DIST += $(srcdir)/misc
 
 srctarball:
 	@cwd="$${PWD}" && \
-	targ="$${cwd}/@PACKAGE_TARNAME@-@PACKAGE_VERSION@.tar.gz" && \
+	varg="$$(echo @PACKAGE_VERSION@ | sed -e s/\-rc/\~rc/ )" && \
+	targ="$${cwd}/@PACKAGE_TARNAME@-$${varg}.tar.gz" && \
 	cd @srcdir@ && \
 	echo "making srctarball from @srcdir@" && \
 	echo "GA	$${targ}" && \
 	git archive --format=tar.gz \
-		--prefix=@PACKAGE_TARNAME@-@PACKAGE_VERSION@/ \
+		--prefix=@PACKAGE_TARNAME@-$${varg}/ \
 		--output=$${targ} \
 		HEAD && \
 	cd -
