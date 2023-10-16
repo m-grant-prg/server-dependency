@@ -1,3 +1,9 @@
+2023-10-16 v1.1.8 Mark Grant <m.grant.prg@gmail.com>
+	* at: Update Copyright for 2023
+	bash: man: Remove .sh extension from scripts in $PATH
+	actions: Add dependabot version update config
+	actions: Run on focal
+
 2021-11-26 v1.1.7 Mark Grant <m.grant.prg@gmail.com>
 	* at: Add AC_COPYRIGHT macro
 	all: Tighten SPDX tags
