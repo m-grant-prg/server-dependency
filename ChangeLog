@@ -1,3 +1,11 @@
+2023-10-16 v1.2.2 Mark Grant <m.grant.prg@gmail.com>
+	* bash: man: Drop .sh extension from scripts in $PATH
+	actions: Add dependabot action version upgrade script
+	lxcu: Remove txt2man, rely on txt2manwrap dependencies
+	at: Support ~ in version numbers
+	actions: Remove txt2man, rely on txt2manwrap dependencies
+	actions: Run on focal
+
 2023-03-30 v1.2.1 Mark Grant <m.grant.prg@gmail.com>
 	* actions: Run on ubuntu-latest
 	at: Update Copyright for 2023
