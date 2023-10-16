@@ -1,7 +1,7 @@
 #########################################################################
 #									#
 # Script ID: src/man/8/Makefile.am					#
-# Author: Copyright (C) 2018-2019, 2021  Mark Grant			#
+# Author: Copyright (C) 2018-2019, 2021, 2023  Mark Grant		#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0-only					#
@@ -20,11 +20,13 @@
 # 27/09/2018	MG	1.0.1	Initial release.			#
 # 20/04/2019	MG	1.0.2	Remove shebang.				#
 # 26/11/2021	MG	1.0.3	Tighten SPDX tag.			#
+# 16/10/2023	MG	1.0.4	Remove .sh extension from scripts in	#
+#				$PATH.					#
 #									#
 #########################################################################
 
 
-dosab.sh.8: Makefile
+dosab.8: Makefile
 	mkdir -p $(@D)
 	rm -f $@ $@.tmp
 	$(edit) $(srcdir)/$(@F).man.in > $@.tmp
@@ -44,10 +46,10 @@ dosab.sh.8: Makefile
 		$@.tmp $@
 	rm -f $@.tmp
 
-dosab.sh.8: $(srcdir)/dosab.sh.8.man.in
+dosab.8: $(srcdir)/dosab.8.man.in
 
-man_MANS = dosab.sh.8
+man_MANS = dosab.8
 
-EXTRA_DIST = $(srcdir)/dosab.sh.8.man.in
+EXTRA_DIST = $(srcdir)/dosab.8.man.in
 
-CLEANFILES = *.tmp dosab.sh.8
+CLEANFILES = *.tmp dosab.8

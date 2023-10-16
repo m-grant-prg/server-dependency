@@ -1,15 +1,15 @@
 #! @bashlocation@
 #########################################################################
 #									#
-#	dosab.sh is automatically generated,				#
+#	dosab is automatically generated,				#
 #		please do not modify!					#
 #									#
 #########################################################################
 
 #########################################################################
 #									#
-# Script ID: dosab.sh							#
-# Author: Copyright (C) 2018-2019, 2021  Mark Grant			#
+# Script ID: dosab							#
+# Author: Copyright (C) 2018-2019, 2021, 2023  Mark Grant		#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0-only					#
@@ -18,7 +18,7 @@
 # To determine if a server is contactable and conditional on that,	#
 # execute stored commands.						#
 #									#
-# Syntax:	dosab.sh [ -h --help || -V --version ]			#
+# Syntax:	dosab [ -h --help || -V --version ]			#
 #									#
 # Exit codes used:-							#
 # Bash standard Exit Codes:	0 - success				#
@@ -75,6 +75,8 @@
 #				used.					#
 #				Move script_exit() before it is used.	#
 # 26/11/2021	MG	1.1.4	Tighten SPDX tag.			#
+# 16/10/2023	MG	1.1.5	Remove .sh extension from scripts in	#
+#				$PATH.					#
 #									#
 #########################################################################
 
@@ -84,7 +86,7 @@
 ##################
 
 readonly outputprefix="$(basename $0):"
-readonly version=1.1.4				# Script version
+readonly version=1.1.5				# Script version
 readonly etclocation=@sysconfdir@/dosab		# Path to etc directory
 readonly packageversion=@pkgversion@		# Package version
 
