@@ -1,13 +1,13 @@
 #########################################################################
 #									#
 # Script ID: src/prg/bash/Makefile.am					#
-# Author: Copyright (C) 2018-2019, 2021  Mark Grant			#
+# Author: Copyright (C) 2018-2019, 2021, 2023  Mark Grant		#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0-only					#
 #									#
 # Purpose:								#
-# AutoMake script file to generate dosab.sh script from source.		#
+# AutoMake script file to generate dosab script from source.		#
 #									#
 #########################################################################
 
@@ -21,6 +21,8 @@
 # 20/04/2019	MG	1.0.2	Remove shebang.				#
 # 24/08/2021	MG	1.0.3	Correct systemd action ordering.	#
 # 26/11/2021	MG	1.0.4	Tighten SPDX tag.			#
+# 16/10/2023	MG	1.0.5	Drop .sh extension from scripts in	#
+#				$PATH.					#
 #									#
 #########################################################################
 
@@ -33,17 +35,17 @@
 #########################################################################
 
 
-dosab.sh: Makefile
+dosab: Makefile
 	mkdir -p $(@D)
 	rm -f $@ $@.tmp
 	test -f ./$@.in || srcdir=$(srcdir)/; \
-	$(edit) $${srcdir}$(@F).in > $@.tmp
+	$(edit) $${srcdir}$(@F).sh.in > $@.tmp
 	mv $@.tmp $@
 	chmod a+x $@
-dosab.sh: $(srcdir)/dosab.sh.in
+dosab: $(srcdir)/dosab.sh.in
 
 
-sbin_SCRIPTS = dosab.sh
+sbin_SCRIPTS = dosab
 
 
 # systemd requires some ordering of it's actions. Please refer to the comment in
@@ -56,5 +58,5 @@ endif
 
 EXTRA_DIST = $(srcdir)/dosab.sh.in
 
-CLEANFILES = *.tmp dosab.sh
+CLEANFILES = *.tmp dosab
 

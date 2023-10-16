@@ -1,7 +1,7 @@
 NAME
-dosab.sh - Take action depending on server availability during boot.
+dosab - Take action depending on server availability during boot.
 SYNOPSIS
-dosab.sh [OPTION]
+dosab [OPTION]
 DESCRIPTION
 This script reads a list of servers from the config file server.list and
 determines whether they are contactable. If they are, commands stored in the
@@ -25,7 +25,7 @@ Written by Mark Grant.
 REPORTING BUGS
 Report bugs to <m.grant.prg@gmail.com>
 COPYRIGHT
-Copyright 2018, 2021 Mark Grant.
+Copyright 2018, 2021, 2023 Mark Grant.
 .br
 License GPLv3: GNU GPL version 3 only
 .br
