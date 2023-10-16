@@ -1,6 +1,5 @@
 #########################################################################
 #									#
-# Script ID: ./configure.ac						#
 # Author: Copyright (C) 2018-2023  Mark Grant				#
 #									#
 # Released under the GPLv3 only.					#
@@ -19,7 +18,6 @@
 #	Use this option to build, install etc the systemd unit file.	#
 #									#
 # Layout: (Only relevant sections will exist).				#
-# ChangeLog : High level ChangeLog					#
 # SECTION  1: Initialisation & Setup					#
 # SECTION  2: Architecture, target and host checks			#
 # SECTION  3: Command line arguments					#
@@ -35,34 +33,6 @@
 # SECTION 13: Check for system services					#
 # SECTION 14: Additional checks & variables				#
 # SECTION 15: Specify the output files					#
-#									#
-#########################################################################
-
-#########################################################################
-#									#
-# Changelog								#
-#									#
-# Date		Author	Version	Description				#
-#									#
-# 28/09/2018	MG	1.0.1	Initial release.			#
-# 21/04/2019	MG	1.0.2	Remove preceding v from version.	#
-#				Re-vamp to new standard layout.		#
-# 21/04/2019	MG	1.0.3	Change logger program check to warn.	#
-# 28/06/2019	MG	1.0.4	Correct ARG_ENABLE help text and	#
-#				message.				#
-#				Add enable option description to this	#
-#				file's header.				#
-# 23/02/2020	MG	1.0.5	Sort program checks alphabetically.	#
-#				Add check for ping.			#
-# 26/11/2021	MG	1.0.6	If git is available and we are inside a	#
-#				git tree then use git describe to add	#
-#				further package version information.	#
-#				Tighten SPDX tag.			#
-#				Add AC_COPYRIGHT macro.			#
-# 10/10/2022	MG	1.0.7	Separate AutoTools generated files from	#
-#				project root.				#
-#				Use AC MSG CHECKING where appropriate.	#
-# 30/03/2023	MG	1.0.8	Update Copyright for 2023.		#
 #									#
 #########################################################################
 
