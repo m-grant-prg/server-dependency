@@ -1,3 +1,22 @@
+2023-10-17 v1.3.1 Mark Grant <m.grant.prg@gmail.com>
+	* build(deps): bump actions/checkout from 2 to 4
+	dependabot[bot] (1):
+
+	bash: Bump dosab version to v1.3.0
+	at: Bump configure version to v1.3.0
+	at: Note - configure syntax from ./configure --help
+	man: Update CL syntax
+	bash: Update CL help
+	bash: man: Drop .sh extension from scripts in $PATH
+	all: Remove most in-file ChangeLogs and versioning
+	at: Upgrade bootstrap.sh to v1.5.7
+	Merge pull request #1 from m-grant-prg/dependabot/github_actions/actions/checkout-4
+	github: Add dependabot version update config
+	actions: Remove txt2man, rely on txt2manwrap dependencies
+	actions: Run on jammy
+	lxcu: Remove txt2man, rely on txt2manwrap dependencies
+	Mark Grant (13):
+
 2023-07-06 v1.3.0 Mark Grant <m.grant.prg@gmail.com>
 	* at: Allow for v1.1.1~rc1 version numbering
 	bash: Suppress shellcheck warning 2181
