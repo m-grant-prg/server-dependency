@@ -1,6 +1,7 @@
 NAME
 dosab - Take action depending on server availability during boot.
 SYNOPSIS
+dosab {-h|-V}
 dosab [OPTION]
 DESCRIPTION
 This script reads a list of servers from the config file server.list and
