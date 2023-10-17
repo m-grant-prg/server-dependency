@@ -9,8 +9,8 @@
 # AutoConf script file to configure Dependency On Server At Boot	#
 # project.								#
 #									#
-# configure cmd line syntax:						#
-# ./configure	[--enable-systemd=yes|no> [default: no]]		#
+# configure cmd line syntax can be displayed by typing:			#
+#	./configure --help						#
 #									#
 # Parameters generic description. For specifics to this configure.ac	#
 # please see inline comments at the point of definition:-		#
