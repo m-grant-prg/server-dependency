@@ -6,7 +6,7 @@
 # SPDX-License-Identifier: GPL-3.0-only					#
 #									#
 # Purpose:								#
-# AutoMake script file to generate dosab.sh script from source.		#
+# AutoMake script file to generate dosab script from source.		#
 #									#
 #########################################################################
 
@@ -19,17 +19,17 @@
 #########################################################################
 
 
-dosab.sh: Makefile
+dosab: Makefile
 	mkdir -p $(@D)
 	rm -f $@ $@.tmp
 	test -f ./$@.in || srcdir=$(srcdir)/; \
-	$(edit) $${srcdir}$(@F).in > $@.tmp
+	$(edit) $${srcdir}$(@F).sh.in > $@.tmp
 	mv $@.tmp $@
 	chmod a+x $@
-dosab.sh: $(srcdir)/dosab.sh.in
+dosab: $(srcdir)/dosab.sh.in
 
 
-sbin_SCRIPTS = dosab.sh
+sbin_SCRIPTS = dosab
 
 
 # systemd requires some ordering of it's actions. Please refer to the comment in
@@ -42,5 +42,5 @@ endif
 
 EXTRA_DIST = $(srcdir)/dosab.sh.in
 
-CLEANFILES = *.tmp dosab.sh
+CLEANFILES = *.tmp dosab
 

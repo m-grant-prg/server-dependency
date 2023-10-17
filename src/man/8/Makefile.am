@@ -11,7 +11,7 @@
 #########################################################################
 
 
-dosab.sh.8: Makefile
+dosab.8: Makefile
 	mkdir -p $(@D)
 	rm -f $@ $@.tmp
 	$(edit) $(srcdir)/$(@F).man.in > $@.tmp
@@ -31,10 +31,10 @@ dosab.sh.8: Makefile
 		$@.tmp $@
 	rm -f $@.tmp
 
-dosab.sh.8: $(srcdir)/dosab.sh.8.man.in
+dosab.8: $(srcdir)/dosab.8.man.in
 
-man_MANS = dosab.sh.8
+man_MANS = dosab.8
 
-EXTRA_DIST = $(srcdir)/dosab.sh.8.man.in
+EXTRA_DIST = $(srcdir)/dosab.8.man.in
 
-CLEANFILES = *.tmp dosab.sh.8
+CLEANFILES = *.tmp dosab.8

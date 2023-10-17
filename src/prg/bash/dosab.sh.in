@@ -1,7 +1,7 @@
 #! @bashlocation@
 #########################################################################
 #									#
-#	dosab.sh is automatically generated,				#
+#	dosab is automatically generated,				#
 #		please do not modify!					#
 #									#
 #########################################################################
@@ -17,7 +17,7 @@
 # To determine if a server is contactable and conditional on that,	#
 # execute stored commands.						#
 #									#
-# Syntax:	dosab.sh [ -h --help || -V --version ]			#
+# Syntax:	dosab [ -h --help || -V --version ]			#
 #									#
 # Exit codes used:-							#
 # Bash standard Exit Codes:	0 - success				#
