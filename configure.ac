@@ -9,13 +9,17 @@
 # AutoConf script file to configure Dependency On Server At Boot	#
 # project.								#
 #									#
-# configure cmd line syntax can be displayed by typing:			#
-#	./configure --help						#
+# configure cmd line syntax:						#
+# ./configure	[--enable-systemd[={yes|no}]]				#
+# Parameter defaults:							#
+#	When specified on the CL, but without the [={yes|no}], the	#
+#	default is yes.							#
 #									#
-# Parameters generic description. For specifics to this configure.ac	#
-# please see inline comments at the point of definition:-		#
+# Parameters general description. For specifics please see inline	#
+# comments at the point of definition:-					#
 # --enable-systemd							#
 #	Use this option to build, install etc the systemd unit file.	#
+#	If not specified on the CL then the default is no.		#
 #									#
 # Layout: (Only relevant sections will exist).				#
 # SECTION  1: Initialisation & Setup					#
