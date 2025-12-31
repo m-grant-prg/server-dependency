@@ -10,13 +10,17 @@
 # project.								#
 #									#
 # configure cmd line syntax:						#
-# ./configure	[--enable-systemd[={yes|no}]]				#
+# ./configure	[--enable-bash-completion[={yes|no}]]			#
+#		[--enable-systemd[={yes|no}]]				#
 # Parameter defaults:							#
 #	When specified on the CL, but without the [={yes|no}], the	#
 #	default is yes.							#
 #									#
 # Parameters general description. For specifics please see inline	#
 # comments at the point of definition:-					#
+# --enable-bash-completion						#
+#	Used to include the bash-completion elements in the build.	#
+#	If not specified on the CL then the default is yes.		#
 # --enable-systemd							#
 #	Use this option to build, install etc the systemd unit file.	#
 #	If not specified on the CL then the default is no.		#
@@ -51,7 +55,7 @@ AC_COPYRIGHT([Copyright (C) 2018-2025  Mark Grant
 	      This script is free to copy or distribute under the terms set out
 	      in the package license. See COPYING for details.])
 
-AC_REVISION([$Revision: 1.3.2 $])
+AC_REVISION([$Revision: 1.3.3 $])
 
 AC_PREREQ([2.69])
 
@@ -111,6 +115,29 @@ AC_CONFIG_MACRO_DIR([m4])
 #########################################
 
 AC_MSG_NOTICE(checking command line arguments)
+
+#
+# The following allows for an enable-bash-completion=yes/no command line option.
+# If not specified on the CL the default is true.
+# The conditional BASH_COMPLETION is made available to the makefiles.
+#
+AC_ARG_ENABLE(bash_completion,
+	AS_HELP_STRING([--enable-bash-completion],
+		       [build to include bash-completion]),
+	[case "${enableval}" in
+		yes) enable_bash_completion=true ;;
+		no)  enable_bash_completion=false ;;
+		*)
+		AC_MSG_ERROR(bad value ${enableval} in enable-bash-completion);;
+	esac],enable_bash_completion=true)
+AM_CONDITIONAL(BASH_COMPLETION, test x$enable_bash_completion = xtrue)
+
+AC_MSG_CHECKING([whether to include bash-completion in the build])
+if test "x${enable_bash_completion}" = xtrue; then
+	AC_MSG_RESULT([yes])
+else
+	AC_MSG_RESULT([no])
+fi
 
 #
 # The following allows for an enable-systemd=yes/no command line option. The
@@ -323,10 +350,11 @@ AC_MSG_NOTICE(processing output files)
 
 # Project Makefiles to create.
 AC_CONFIG_FILES([Makefile
-		src/prg/bash/Makefile
+		src/bash-comp/Makefile
+		src/conf/etc/Makefile
 		src/man/5/Makefile
 		src/man/8/Makefile
-		src/conf/etc/Makefile
+		src/prg/bash/Makefile
 		src/systemd/Makefile])
 
 AC_OUTPUT

@@ -1,6 +1,6 @@
 #########################################################################
 #									#
-# Author: Copyright (C) 2018-2019, 2021, 2023  Mark Grant		#
+# Author: Copyright (C) 2018-2019, 2021, 2023, 2025  Mark Grant		#
 #									#
 # Released under the GPLv3 only.					#
 # SPDX-License-Identifier: GPL-3.0-only					#
@@ -23,7 +23,8 @@
 ACLOCAL_AMFLAGS = -I m4
 
 
-SUBDIRS = src/conf/etc
+SUBDIRS = src/bash-comp
+SUBDIRS += src/conf/etc
 SUBDIRS += src/man/5 src/man/8
 
 # systemd requires the ordering of certain actions, so:-
