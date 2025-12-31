@@ -186,6 +186,7 @@ proc_CL()
 # Run the command file.
 # Parameters - $1 is the command file name.
 # No return value.
+# shellcheck disable=SC2317  # Shellcheck false positive, ignore.
 run_cmd_file()
 {
 	local command
