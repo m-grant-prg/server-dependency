@@ -1,3 +1,28 @@
+2026-01-04 v1.4.0 Mark Grant <m.grant.prg@gmail.com>
+	*  build(deps): bump actions/checkout from 5 to 6
+	build(deps): bump actions/checkout from 4 to 5
+dependabot[bot] (2):
+
+	v1.4.0-rc2
+	at: Update Copyright for 2026
+	bash-comp: Add bash completion
+	bash: Fix shellcheck double quote warning
+	bash: Ignore shellcheck false positive
+	bash: Silence trap function unreachable code warning
+	bash: Declare and assign var seperately
+	bash: Standardise on --help layout
+	Merge pull request #5 from m-grant-prg/dependabot/github_actions/tip/actions/checkout-6
+	at: Upgrade bootstrap.sh to v1.6.2
+	at: Upgrade bootstrap.sh to v1.6.1
+	Merge pull request #2 from m-grant-prg/dependabot/github_actions/tip/actions/checkout-5
+	v1.4.0-rc1
+	actions: Run on Noble
+	actions: Set dependabot to target stable and old stable branches
+	at: Improve CL arguments comments
+	at: Update Copyright for 2025
+	actions: Fix trivial whitespace formatting issues
+Mark Grant (18):
+
 2024-04-28 v1.3.2 Mark Grant <m.grant.prg@gmail.com>
 	*  git: Correct reasoning in some gitignore files
 	at: Update Copyright for 2024
