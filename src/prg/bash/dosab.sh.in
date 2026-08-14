@@ -1,4 +1,4 @@
-#! @bashlocation@
+#! @envlocation@ bash
 #########################################################################
 #									#
 #	dosab is automatically generated,				#
