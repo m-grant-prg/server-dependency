@@ -163,8 +163,8 @@ proc_CL()
 			script_exit 0
 			;;
 		-V|--version)
-			printf "%s Script version %s\n" "$0" $version
-			printf "%s Package version %s\n" "$0" $packageversion
+			printf "%s Script version %s\n" "$0" "$version"
+			printf "%s Package version %s\n" "$0" "$packageversion"
 			shift
 			script_exit 0
 			;;
@@ -241,7 +241,7 @@ proc_server_list()
 		script_exit 66
 	fi
 
-	exec 3<$etclocation/server.list
+	exec 3<"$etclocation"/server.list
 	std_cmd_err_handler $?
 
 	while read -u3 -r srv; do
