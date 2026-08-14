@@ -236,6 +236,11 @@ if test "x$BASH" = "xno" ; then
 	AC_MSG_ERROR([bash not found])
 fi
 
+AC_PATH_PROG([ENV], [env], [no])
+if test "x$ENV" = "xno" ; then
+	AC_MSG_ERROR([env not found])
+fi
+
 AC_MSG_NOTICE(checking for particular programs required at run time)
 AC_CHECK_PROG(ECHO, echo, yes, no)
 if test "x$ECHO" = "xno" ; then
@@ -354,7 +359,10 @@ AC_MSG_NOTICE(processing additional checks and variables)
 #					${libexecdir}/${PACKAGE}
 #
 AC_SUBST([edit], ["$SED \
+		-e 's|@abstopsrcdir[@]|\$(abs_top_srcdir)|g' \
+		-e 's|@abstopbuilddir[@]|\$(abs_top_builddir)|g' \
 		-e 's|@bashlocation[@]|\$(BASH)|g' \
+		-e 's|@envlocation[@]|\$(ENV)|g' \
 		-e 's|@pkgversion[@]|\$(pkgversion)|g' \
 		-e 's|@prefix[@]|\$(prefix)|g' \
 		-e 's|@exec_prefix[@]|\$(exec_prefix)|g' \
@@ -407,6 +415,8 @@ AC_CONFIG_FILES([Makefile
 		src/man/5/Makefile
 		src/man/8/Makefile
 		src/prg/bash/Makefile
+		src/prg/tests/shellcheck/Makefile
+		src/prg/run-tests/Makefile
 		src/systemd/Makefile])
 
 AC_OUTPUT
