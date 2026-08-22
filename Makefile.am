@@ -42,8 +42,8 @@ SUBDIRS += src/man/5 src/man/8
 #	service-post (hook)
 #		daemon reload
 SUBDIRS += src/prg/bash
-SUBDIRS += src/prg/tests/shellcheck
-SUBDIRS += src/prg/run-tests
+SUBDIRS += src/tests/shellcheck
+SUBDIRS += src/run-tests
 if SYSD
 SUBDIRS += src/systemd
 endif
